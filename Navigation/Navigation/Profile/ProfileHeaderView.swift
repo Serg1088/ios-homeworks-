@@ -103,16 +103,17 @@ final class ProfileHeaderView: UIView {
         
         addSubview(setStatusButton)
         NSLayoutConstraint.activate([
-        setStatusButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
-        setStatusButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -16),
+        setStatusButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
+        setStatusButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
         setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 32),
-        setStatusButton.heightAnchor.constraint(equalToConstant: 50)
+        setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+        setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
         
         addSubview(statusTextField)
         NSLayoutConstraint.activate([
-        statusTextField.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
-        statusTextField.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -16),
+        statusTextField.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 12),
+        statusTextField.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
         statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
         statusTextField.heightAnchor.constraint(equalToConstant: 40)
         ])

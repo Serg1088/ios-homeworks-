@@ -53,12 +53,12 @@ class PostTableViewCell: UITableViewCell{
         }()
         
         private lazy var viewsPost: UILabel = {
-           let viewsLb = UILabel()
-            viewsLb.font = .systemFont(ofSize: 16)
-            viewsLb.text = "Views:"
-            viewsLb.textColor = .black
-            viewsLb.translatesAutoresizingMaskIntoConstraints = false
-            return viewsLb
+           let views = UILabel()
+            views.font = .systemFont(ofSize: 16)
+            views.text = "Views:"
+            views.textColor = .black
+            views.translatesAutoresizingMaskIntoConstraints = false
+            return views
         }()
         
         private lazy var viewsPostCount: UILabel = {

@@ -10,23 +10,15 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style:.insetGrouped)
+        let tableView = UITableView(frame: .zero, style:.grouped)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-    var arrayPosts: [PostStruct] = [
-        
-        PostStruct(author: "BelkinSK", description: "Яблоки", image: ("apples"), likes: 533, views: 777),
-        PostStruct(author: "BelkinSK", description: "Яичница", image: ("eggs"), likes: 234, views: 567),
-        PostStruct(author: "BelkinSK", description: "Гранат", image: ("pomegranate"), likes: 992, views: 992),
-        PostStruct(author: "BelkinSK", description: "Клубника", image:  ("strawberry"), likes: 100, views: 332),
-        PostStruct(author: "BelkinSK", description: "Кукуруза", image: ("corn"), likes: 200, views: 350)
-    ]
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -40,22 +32,32 @@ class ProfileViewController: UIViewController {
 
 }
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayPosts.count
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = ProfileHeaderView()
-        return headerView
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? 1 : arrayPosts.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
-        cell.setup(with: arrayPosts[indexPath.row])
-        return cell
+        let cellPost = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
+        let cellPhotos = tableView.dequeueReusableCell(withIdentifier: "PhotosTableViewCell", for: indexPath) as! PhotosTableViewCell
+        cellPost.setup(with: arrayPosts[indexPath.row])
+        return indexPath.section == 0 ? cellPhotos : cellPost
     }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let PHView = ProfileHeaderView()
+        return section == 0 ? PHView : nil
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        200
+        return section == 0 ? UITableView.automaticDimension : 0
+        
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
-        }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let photoGallery = PhotosViewController()
+        photoGallery.title = "Photo Gallery"
+        indexPath.section == 0 ? navigationController?.pushViewController(photoGallery, animated: true) : nil
     }
+}
