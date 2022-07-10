@@ -76,14 +76,13 @@
 		0B9EF3CD2847DB6B008B1DDA /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				0BD2E9FF28719F00004D6D5A /* Login */,
+				0B9EF3E42847DBCB008B1DDA /* FeedViewController.swift */,
+				0B9EF3EA2849EDB6008B1DDA /* InfoViewController.swift */,
+				0B9EF3E62847E6D2008B1DDA /* PostViewController.swift */,
 				0BB25E97284E751300776813 /* Profile */,
 				0BD2EA0028719F95004D6D5A /* PhotosGallery */,
 				0B9EF3CE2847DB6B008B1DDA /* AppDelegate.swift */,
-				0B9EF3E42847DBCB008B1DDA /* FeedViewController.swift */,
-				0B9EF3E62847E6D2008B1DDA /* PostViewController.swift */,
 				0BD2E9EA286A1394004D6D5A /* OldPost.swift */,
-				0B9EF3EA2849EDB6008B1DDA /* InfoViewController.swift */,
 				0B9EF3D72847DB6D008B1DDA /* Assets.xcassets */,
 				0B9EF3D92847DB6D008B1DDA /* LaunchScreen.storyboard */,
 				0B9EF3DC2847DB6D008B1DDA /* Info.plist */,
@@ -94,6 +93,7 @@
 		0BB25E97284E751300776813 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				0BD2E9FF28719F00004D6D5A /* Login */,
 				0B9EF3E22847DBBE008B1DDA /* ProfileViewController.swift */,
 				0BB25E98284E754000776813 /* ProfileHeaderView.swift */,
 				0BD2E9EC286A2314004D6D5A /* PostTableViewCell.swift */,

@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class ProfileHeaderView: UIView {
-    private lazy var avatarImageView: UIImageView = {
+final class ProfileHeaderView: UITableViewHeaderFooterView {
+    var avatarImageView: UIImageView = {
         let avatar = UIImageView()
         avatar.image = UIImage(named: "ava")
         avatar.clipsToBounds = true
@@ -63,8 +63,8 @@ final class ProfileHeaderView: UIView {
     }()
   
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(reuseIdentifier: String?) {
+        super .init(reuseIdentifier: reuseIdentifier)
         setupView()
     }
     
