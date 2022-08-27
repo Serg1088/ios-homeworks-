@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class ProfileHeaderView: UITableViewHeaderFooterView {
     var avatarImageView: UIImageView = {
@@ -79,44 +80,76 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private func setupView () {
         addSubview(avatarImageView)
-        NSLayoutConstraint.activate([
-        avatarImageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
-        avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-        avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-        avatarImageView.heightAnchor.constraint(equalToConstant: 100)
-        ])
+        avatarImageView.snp.makeConstraints { ava in
+            ava.left.equalTo(16)
+            ava.top.equalTo(16)
+            ava.width.equalTo(100)
+            ava.height.equalTo(100)
+        }
+        
+//        NSLayoutConstraint.activate([
+//        avatarImageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
+//        avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+//        avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+//        avatarImageView.heightAnchor.constraint(equalToConstant: 100)
+//        ])
         
         addSubview(fullNameLAbel)
-        NSLayoutConstraint.activate([
-        fullNameLAbel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
-        fullNameLAbel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
-        fullNameLAbel.widthAnchor.constraint(equalToConstant: 100)
-        ])
+        fullNameLAbel.snp.makeConstraints { fullName in
+            fullName.left.equalTo(avatarImageView.snp_rightMargin).inset(-28)
+            fullName.top.equalTo(40)
+            fullName.width.equalTo(100)
+        }
+//        NSLayoutConstraint.activate([
+//        fullNameLAbel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
+//        fullNameLAbel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+//        fullNameLAbel.widthAnchor.constraint(equalToConstant: 100)
+//        ])
        
         
         addSubview(statusLabel)
-        NSLayoutConstraint.activate([
-        statusLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
-        statusLabel.topAnchor.constraint(equalTo: fullNameLAbel.bottomAnchor, constant: 27)
-        ])
+        statusLabel.snp.makeConstraints { status in
+            status.left.equalTo(avatarImageView.snp_rightMargin).inset(-28)
+            status.top.equalTo(fullNameLAbel.snp_bottomMargin).inset(-14)
+        }
+//        NSLayoutConstraint.activate([
+//        statusLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 16),
+//        statusLabel.topAnchor.constraint(equalTo: fullNameLAbel.bottomAnchor, constant: 27)
+//        ])
        
         
         addSubview(setStatusButton)
-        NSLayoutConstraint.activate([
-        setStatusButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
-        setStatusButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
-        setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 32),
-        setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-        setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
-        ])
+        setStatusButton.snp.makeConstraints {setStatus in
+            setStatus.left.equalTo(12)
+            setStatus.right.equalTo(-12)
+            setStatus.top.equalTo(avatarImageView.snp_bottomMargin).inset(-32)
+            setStatus.height.equalTo(50)
+            setStatus.bottom.equalTo(snp_bottomMargin)
+        }
+        
+        
+//        NSLayoutConstraint.activate([
+//        setStatusButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 12),
+//        setStatusButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
+//        setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 32),
+//        setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+//        setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+//        ])
         
         addSubview(statusTextField)
-        NSLayoutConstraint.activate([
-        statusTextField.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 12),
-        statusTextField.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
-        statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
-        statusTextField.heightAnchor.constraint(equalToConstant: 40)
-        ])
+        statusTextField.snp.makeConstraints{ text in
+            text.left.equalTo(avatarImageView.snp_rightMargin).inset(-16)
+            text.right.equalTo(-12)
+            text.height.equalTo(33)
+            text.top.equalTo(statusLabel.snp_bottomMargin).inset(-20)
+        }
+        
+//        NSLayoutConstraint.activate([
+//        statusTextField.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 12),
+//        statusTextField.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -12),
+//        statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
+//        statusTextField.heightAnchor.constraint(equalToConstant: 40)
+//        ])
        
     }
     @objc func buttonPressed() {

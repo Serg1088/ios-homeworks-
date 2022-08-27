@@ -7,6 +7,7 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell{
     static var identifier: String = "postTableViewCell"
@@ -129,7 +130,13 @@ class PostTableViewCell: UITableViewCell{
             descriptionPost.text = post.description
             likesPostCount.text = String(post.likes)
             viewsPostCount.text = String(post.views)
+            
+            // применеие фильтра к картинкам постов
+            if let image = UIImage(named: post.image) {
+            let filter = ColorFilter.noir
+            ImageProcessor().processImage(sourceImage: image, filter: filter) { imagePost.image = $0 }
         }
         
+        }
 }
 
