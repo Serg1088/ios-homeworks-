@@ -10,24 +10,24 @@ import UIKit
 final class ProfileHeaderView: UITableViewHeaderFooterView {
     var avatarImageView: UIImageView = {
         let avatar = UIImageView()
-        avatar.image = UIImage(named: "ava")
+//        avatar.image = UIImage(named: "ava")
         avatar.clipsToBounds = true
         avatar.layer.borderWidth = 3
         avatar.layer.borderColor = CGColor(gray: 5, alpha: 5)
         avatar.translatesAutoresizingMaskIntoConstraints = false
         return avatar
     }()
-    private lazy var fullNameLAbel: UILabel = {
+    lazy var fullNameLAbel: UILabel = {
         let nick = UILabel()
-        nick.text = "BelkinSK"
+//        nick.text = "BelkinSK"
         nick.textColor = .black
         nick.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         nick.translatesAutoresizingMaskIntoConstraints = false
         return nick
     }()
-    private lazy var statusLabel: UILabel = {
+    lazy var statusLabel: UILabel = {
         let status = UILabel()
-        status.text = "Waiting for something..."
+//        status.text = "Waiting for something..."
         status.textColor = .gray
         status.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         status.translatesAutoresizingMaskIntoConstraints = false
@@ -61,11 +61,18 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
     }()
+    
+
+    let user = CurrentUserService()
+    let userTest = TestUserService()
+
+    
   
     
     override init(reuseIdentifier: String?) {
         super .init(reuseIdentifier: reuseIdentifier)
         setupView()
+        userSetup()
     }
     
     required init?(coder: NSCoder) {
@@ -118,6 +125,18 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         statusTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
        
+    }
+
+    private func userSetup() {
+#if DEBUG
+        avatarImageView.image = userTest.userTest.avatar
+        statusLabel.text = userTest.userTest.status
+        fullNameLAbel.text = userTest.userTest.fullName
+#else
+        avatarImageView.image = user.userLogin.avatar
+        statusLabel.text = user.userLogin.status
+        fullNameLAbel.text = user.userLogin.fullName
+#endif
     }
     @objc func buttonPressed() {
         print(statusLabel.text!)

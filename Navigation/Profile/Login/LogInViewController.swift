@@ -8,6 +8,9 @@
 import UIKit
 final class LoginViewController: UIViewController {
     
+    private let currentUserService = CurrentUserService ()
+    private let testUserService = TestUserService ()
+    
     private let loginView: UIView = {
         let loginView = UIView()
         return loginView
@@ -133,17 +136,27 @@ final class LoginViewController: UIViewController {
 
     
     @objc private func buttonAction() {
-        
-        let profileViewController = ProfileViewController()
+#if DEBUG
+        let user = testUserService.userTest
+#else
+        let user = currentUserService.userLogin
+#endif
+        guard loginTextField.text == user.login, passwordTextField.text == user.password else {
+            print ("Не верный логин или пароль")
+            return
+        }
+        let profileViewController = ProfileViewController(user: user)
         self.navigationController?.pushViewController(profileViewController, animated: true)
     }
+    
+    @objc func forcedHidingKeyboard() {
+        view.endEditing(true)
+    }
+    
+    
     private func setupGestures() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.forcedHidingKeyboard))
         self.view.addGestureRecognizer(tapGesture)
-    }
-    @objc func forcedHidingKeyboard() {
-        view.endEditing(true)
-        
     }
     
     private let notificationCenter = NotificationCenter.default

@@ -9,11 +9,13 @@ import UIKit
 import StorageService
 
 class ProfileViewController: UIViewController {
+    private let user: User
+    
     var startpoint: CGPoint?
     
     private lazy var avatarImageView: UIImageView = {
         let avatar = UIImageView()
-        avatar.image = UIImage(named: "ava")
+        avatar.image = user.avatar
         avatar.alpha = 0
         avatar.clipsToBounds = true
         avatar.layer.borderWidth = 3
@@ -49,6 +51,15 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
+    init(user:User) {
+            self.user = user
+            super.init(nibName: nil, bundle: nil)
+        }
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewConstrains()
@@ -69,6 +80,7 @@ class ProfileViewController: UIViewController {
         startpoint = self.avatarImageView.center
         
     }
+
     private func tableViewConstrains(){
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
